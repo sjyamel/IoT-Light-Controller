@@ -9,6 +9,7 @@ const [isOn, setIsOn] = useState(false);
 const fetchLedStatus = async ()=>{
   try{
     const response = await fetch("https://iot-api-delta.vercel.app/led-status");
+    
   if (response.ok) {
     // If the request was successful, toggle the LED status
     let status = await response.json();
@@ -37,6 +38,14 @@ const toggleOn = async () => {
       },
       body: JSON.stringify({ status: isOn ? "off" : "on" }) // Send the correct status in the request
     });
+    const status = isOn ? "on": "off";
+    await fetch(`http://192.168.1.220/led/${status}`)
+  .then(res => res.text())
+  .then(data=>{
+    console.log(data);
+  }).catch(error => {
+    console.error("Error", error);
+  });
 
     // Check if the request was successful
     if (response.ok) {
