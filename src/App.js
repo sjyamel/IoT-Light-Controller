@@ -39,7 +39,7 @@ const toggleOn = async () => {
     //   body: JSON.stringify({ status: isOn ? "off" : "on" }) // Send the correct status in the request
     // });
     const status = isOn ? "on": "off";
-    await fetch(`http://192.168.1.220/led/${status}`)
+    await fetch(`https://192.168.1.220/led/${status}`)
   .then(res => res.text())
   .then(data => {
     console.log(data);
